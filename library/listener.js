@@ -4,15 +4,15 @@ var listener = {
         num: 0
     },
     create: function (name, value) { // listener.create('name', 'value');
-        "use strict";
+        'use strict';
         this.event[name.replace(/-/g, "")] = value;
     },
     dispatch: function (name, func, loop, listenOnce, delay) { // listener.dispatch('name', func, 2, true, 50000);
-        "use strict";
+        'use strict';
         var widow = window,
-			that = this,
-			i = 0,
-			num;
+            that = this,
+            i = 0,
+            num;
         loop = loop || 1; // 0 === infinite loops;
         delay = delay || 1000;
         that.inter.num = that.inter.num + 1;
@@ -32,7 +32,7 @@ var listener = {
         }, delay);
     },
     remove: function (name) { // listener.remove('name');
-        "use strict";
+        'use strict';
         var that = this;
         window.clearInterval(that.inter[name]);
         delete that.event[name];
