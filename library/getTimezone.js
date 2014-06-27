@@ -1,23 +1,24 @@
-function getTimezone (date) {
+function getTimezone(date) {
+    'use strict';
 
     var timezones, timezone;
 
     if (typeof date === 'string') {
         date = new Date(date);
     }
-    
-    function isDST (date) {
-    
+
+    function isDST(date) {
+
         var jan, jul, stdTimezoneOffset;
-    
+
         if (typeof date === 'string') {
             date = new Date(date);
         }
-    
+
         jan = new Date(date.getFullYear(), 0, 1);
         jul = new Date(date.getFullYear(), 6, 1);
         stdTimezoneOffset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-    
+
         return date.getTimezoneOffset() < stdTimezoneOffset;
     }
 
@@ -26,7 +27,7 @@ function getTimezone (date) {
     } else {
         timezones = ['EST', 'CST', 'MST', 'PST']; // standard time
     }
-    
+
     timezone = date.getTimezoneOffset() / 60;
 
     if ((isDST(date) && timezone === 4) || (!isDST(date) && timezone === 5)) {
