@@ -1,60 +1,62 @@
-function storage(arg){
-	var results = false;
+function storage(arg) {
+    'use strict';
 
-	if(typeof(Storage) !== "undefined"){
+    var results = false;
 
-		if(typeof(arg.name) === "undefined"){
-			arg.name = '';
-		};
+    if (Storage !== undefined) {
 
-		if(typeof(arg.value) === "undefined"){
-			arg.value = '';
-		};
+        if (arg.name === undefined) {
+            arg.name = '';
+        }
 
-		if(typeof(arg.method) === "undefined"){
-			arg.method = 'get';
-		};
+        if (arg.value === undefined) {
+            arg.value = '';
+        }
 
-		switch(arg.method.toLowerCase()){
-			case 'post':
-			case 'create':
+        if (arg.method === undefined) {
+            arg.method = 'get';
+        }
 
-				if(localStorage.getItem(arg.name) === null && arg.name !== '*'){
-					localStorage.setItem(arg.name, arg.value);
-					results = true;
-				};
+        switch (arg.method.toLowerCase()) {
+        case 'post':
+        case 'create':
 
-				break;
-			case 'update':
+            if (localStorage.getItem(arg.name) === null && arg.name !== '*') {
+                localStorage.setItem(arg.name, arg.value);
+                results = true;
+            }
 
-				if(localStorage.getItem(arg.name) !== null){
-					localStorage.setItem(arg.name, arg.value);
-					results = true;
-				};
+            break;
+        case 'update':
 
-				break;
-			case 'delete':
+            if (localStorage.getItem(arg.name) !== null) {
+                localStorage.setItem(arg.name, arg.value);
+                results = true;
+            }
 
-				if(localStorage.getItem(arg.name) !== null){
-					localStorage.removeItem(arg.name);
-					results = true;
-				}else if(localStorage.length > 0){
-					if(arg.name === '*' || arg.name === 'all'){
-						localStorage.clear();
-						results = true;
-					}
-				};
+            break;
+        case 'delete':
 
-				break;
-			default: // read || get
+            if (localStorage.getItem(arg.name) !== null) {
+                localStorage.removeItem(arg.name);
+                results = true;
+            } else if (localStorage.length > 0) {
+                if (arg.name === '*' || arg.name === 'all') {
+                    localStorage.clear();
+                    results = true;
+                }
+            }
 
-				if(localStorage.getItem(arg.name) !== null){
-					results = localStorage.getItem(arg.name);
-				};
+            break;
+        default: // read || get
 
-				break;
-		};
-	};
+            if (localStorage.getItem(arg.name) !== null) {
+                results = localStorage.getItem(arg.name);
+            }
 
-	return results;
-};
+            break;
+        }
+    }
+
+    return results;
+}
