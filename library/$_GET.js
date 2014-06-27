@@ -1,9 +1,10 @@
-function $_GET (parameter) {
+function $_GET(parameter) {
+    'use strict';
 
     var queryString, regex, variableString, value;
 
     queryString = document.location.search;
-    regex = new RegExp("(" + parameter + "=){1}(.(?!\&))*(.(?=\&))?");
+    regex = new RegExp("(" + parameter + "=){1}(.(?!&))*(.(?=&))?");
 
     if (regex.test(queryString)) {
         variableString = regex.exec(queryString);
@@ -13,4 +14,4 @@ function $_GET (parameter) {
     }
 
     return value;
-};
+}
