@@ -1,16 +1,16 @@
-var $_GET = function (parameter) {
+function $_GET (parameter) {
 
-	var queryString, regex, variableString, value;
+    var queryString, regex, variableString, value;
 
-	queryString = document.URL
-	regex = new RegExp("(" + parameter + "=){1}(.(?!\&))*(.(?=\&))?");
+    queryString = document.location.search;
+    regex = new RegExp("(" + parameter + "=){1}(.(?!\&))*(.(?=\&))?");
 
-	if (regex.test(queryString)) {
-		variableString = regex.exec(queryString);
-		value = variableString[0].substr(parameter.length + 1);
-	}else{
-		value = false;
-	}
+    if (regex.test(queryString)) {
+        variableString = regex.exec(queryString);
+        value = decodeURIComponent(variableString[0].substr(parameter.length + 1));
+    } else {
+        value = false;
+    }
 
-	return value;
+    return value;
 };
